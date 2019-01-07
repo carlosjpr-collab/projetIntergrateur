@@ -7,6 +7,7 @@
 - To connect to minio and uplade a file inside it using python, excute 
    -  pip3 install minio
    -  Download minioPythonUploadFile.py
+   -  Change the Configuration inside it like file name and minio ip adress
    -  excute python3.6 minioPythonUploadFile.py
 
 
