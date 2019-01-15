@@ -1,0 +1,76 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import matplotlib.pylab as plt
+import imageio
+
+
+array_loaded = np.load ('test.npy')
+label = np.load('test_labels_0_10_25.npy')
+
+
+#print(array_loaded[0])
+#print(label[0])
+#print ("label"+ str(label.shape))
+#print("image shape"+str(array_loaded[0].shape))
+#new_array = np.zeros((32,32,3))
+class_names = ['urban area', 'agricultural territory', 'forests', 'wetlands and surfaces with water']
+
+plt.figure(figsize=(10,10))
+
+plt.xticks([])
+plt.yticks([])
+plt.grid(True)
+  
+for line in range(0,30):
+    image = np.zeros((32,32,3))
+    for m in range(0,32) :
+        for n in range(0,32) :
+            image[m,n]=array_loaded[line, m,n]
+                 
+    plt.subplot(9,4,line+1)
+    plt.imshow(image, cmap=plt.cm.binary,alpha=0.75, interpolation='spline36')
+    plt.xlabel(label[line])
+plt.tight_layout()
+plt.show()   
+
+# Importing the Keras libraries and packages
+from keras.models import Sequential
+from keras.layers import Convolution2D
+from keras.layers import MaxPooling2D
+from keras.layers import Flatten
+from keras.layers import Dense
+# importing 
+from keras.preprocessing import image
+
+# Initialising the CNN
+classifier = Sequential()
+
+# Step 1 - Convolution
+classifier.add(Convolution2D(32, 3, 3, input_shape = (32, 32, 3), activation = 'relu'))
+
+# Step 2 - Pooling
+classifier.add(MaxPooling2D(pool_size = (2, 2)))
+
+# Adding a second convolutional layer
+
+classifier.add(Convolution2D(32, 3, 3, activation = 'relu'))
+
+classifier.add(MaxPooling2D(pool_size = (2, 2)))
+
+# Step 3 - Flattening
+classifier.add(Flatten())
+
+# Step 4 - Full connection
+classifier.add(Dense(output_dim = 128, activation = 'relu'))
+classifier.add(Dense(output_dim = 5, activation = 'sigmoid'))
+
+# Compiling the CNN
+classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
+
+# Part 2 - Fitting the CNN to the images
+classifier.fit(array_loaded, label, epochs=1)
+
+#Make predictions
+predictions = classifier.predict(array_loaded)
+
