@@ -10,4 +10,4 @@
    -  Change the Configuration inside it like file name and minio ip adress
    -  excute python3.6 minioPythonUploadFile.py
 
-
+- install spark  https://www.roseindia.net/spark/install-spark-on-ubuntu-18.04.shtml
