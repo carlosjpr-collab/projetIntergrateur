@@ -1,4 +1,4 @@
-#https://machinelearningmastery.com/save-load-keras-deep-learning-models/
+#https://jovianlin.io/saving-loading-keras-models/
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
@@ -69,6 +69,8 @@ from keras.layers import Convolution2D
 from keras.layers import MaxPooling2D
 from keras.layers import Flatten
 from keras.layers import Dense
+from keras.models import load_model
+
 # importing
 from keras.preprocessing import image
 
@@ -101,14 +103,10 @@ classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = [
 classifier.fit(tain_images[1:100], train_labels[1:100], epochs=5)
 
 #Make predictions
-predictions = classifier.predict(tain_images)
+predictions = classifier.predict(tain_images[1:100])
 print(predictions[1])
 print(train_labels[1])
 
-# serialize model to JSON
-model_json = classifier.to_json()
-with open("Model/classifier.json", "w") as json_file:
-    json_file.write(model_json)
-# serialize weights to HDF5
-model.save_weights("Model/classifier.h5")
+# Creates a HDF5 file 'my_model.h5'
+classifier.save('my_model.h5')
 print("Saved model to disk Model/*")
