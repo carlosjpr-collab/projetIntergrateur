@@ -21,8 +21,7 @@ def nb_images_noires (l1, counter):
 	return counter
 
 # créé un nouveau dataset sans images noires
-def create_array (l1,l2):
-	new_array=np.zeros((l2, 32,32,3))
+def create_array (l1,l2, array):
 	image = np.zeros((32,32,3))
 	index = 0
 	for line in range (0,l1):
@@ -31,9 +30,9 @@ def create_array (l1,l2):
 				image[i,j]=array_loaded[line,i,j]
 		max = image.max()
 		if (max != 0.0):
-			new_array[index]=image
+			array[index]=image
 			index = index + 1
-	return new_array
+	return array
 
 
 # récupère le nb d images noires
@@ -46,7 +45,7 @@ if (result != 0):
 	print(len2)
 	# création d'une nouvelle image numpy
 	new_array = np.zeros((len2, 32,32,3)) 
-	new_array = create_array (len1,len2)
+	new_array = create_array (len1,len2, new_array)
 
 	# on la sauve dans un fichier
 	np.save('INSA_Train/new_train_RGB.npy', new_array)
@@ -55,4 +54,5 @@ if (result != 0):
 #sinon
 else :
 	print("pas d images noires dans le dataset")
+
 
