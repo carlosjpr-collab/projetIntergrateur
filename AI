@@ -1,12 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
-import matplotlib.pylab as plt
+import matplotlib.pylab as pylab
 import imageio
 
 
-array_loaded = np.load ('test.npy')
-label = np.load('test_labels_0_10_25.npy')
+array_loaded = np.load ('INSA_Train/new_train_RGB.npy')
+label = np.load('INSA_Train/new_train_label.npy')
 
 
 #print(array_loaded[0])
@@ -14,10 +14,11 @@ label = np.load('test_labels_0_10_25.npy')
 #print ("label"+ str(label.shape))
 #print("image shape"+str(array_loaded[0].shape))
 #new_array = np.zeros((32,32,3))
-class_names = ['urban area', 'agricultural territory', 'forests', 'wetlands and surfaces with water']
+class_names = ['urban area', 'agricultural territory', 'forests', 'wetlands', 'surfaces with water']
 
 plt.figure(figsize=(10,10))
 
+"""
 plt.xticks([])
 plt.yticks([])
 plt.grid(True)
@@ -33,6 +34,7 @@ for line in range(0,30):
     plt.xlabel(label[line])
 plt.tight_layout()
 plt.show()   
+"""
 
 # Importing the Keras libraries and packages
 from keras.models import Sequential
@@ -73,4 +75,3 @@ classifier.fit(array_loaded, label, epochs=1)
 
 #Make predictions
 predictions = classifier.predict(array_loaded)
-
