@@ -1,12 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Ce script permet de copier le dataset test en supprimant les images noires
+# Ce script permet de copier le dataset test en supprimant les images noires et le fragmente ensuite en 3
 
 array_loaded = np.load ('INSA_Test/test_RGB_0_10_25.npy')
 
+
 len1=(array_loaded.shape[0])-1
-print(len1)
 counter = 0
 
 # la fonction retourne le nombre d'images noires dans la dataset
@@ -48,11 +48,20 @@ if (result != 0):
 	# création d'une nouvelle image numpy
 	new_array = np.zeros((len2, 32,32,3)) 
 	new_array = create_array (len1,len2)
+
 	# on la sauve dans un fichier
 	np.save('INSA_Test/new_test_RGB.npy', new_array)
+
+	# pour fragmenter en 3 le nouveau dataset
+	array1, array2, array3 = np.split(new_array,3)
+	# on les sauvegarde
+	np.save('INSA_Test/test_image1.npy',array1)
+	np.save('INSA_Test/test_image2.npy',array2)
+	np.save('INSA_Test/test_image3.npy',array3)
+	print('Decoupage du dataset')
+	
 
 #sinon
 else :
 	print("pas d images noires dans le dataset")
-
 
