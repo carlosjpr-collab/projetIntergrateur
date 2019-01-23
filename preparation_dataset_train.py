@@ -1,12 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Ce script permet de copier le dataset train en supprimant les images noires
+# Ce script permet de copier le dataset train en supprimant les images noires 
 
 array_loaded = np.load ('INSA_Train/train_RGB_0_10_25.npy')
 
 len1=(array_loaded.shape[0])-1
-print(len1)
 counter = 0
 
 # la fonction retourne le nombre d'images noires dans la dataset
@@ -48,11 +47,12 @@ if (result != 0):
 	# création d'une nouvelle image numpy
 	new_array = np.zeros((len2, 32,32,3)) 
 	new_array = create_array (len1,len2)
+
 	# on la sauve dans un fichier
 	np.save('INSA_Train/new_train_RGB.npy', new_array)
+
 
 #sinon
 else :
 	print("pas d images noires dans le dataset")
-
 
