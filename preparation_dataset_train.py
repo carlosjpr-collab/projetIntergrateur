@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 # Ce script permet de copier le dataset train en supprimant les images noires 
 
 array_loaded = np.load ('INSA_Train/train_RGB_0_10_25.npy')
+label_loaded = np.load ('INSA_Train/train_label_class.npy')
 
 len1=(array_loaded.shape[0])-1
 counter = 0
@@ -21,7 +22,7 @@ def nb_images_noires (l1, counter):
 	return counter
 
 # créé un nouveau dataset sans images noires
-def create_array (l1,l2, array):
+def create_array (l1,l2, array, label):
 	image = np.zeros((32,32,3))
 	index = 0
 	for line in range (0,l1):
@@ -31,6 +32,7 @@ def create_array (l1,l2, array):
 		max = image.max()
 		if (max != 0.0):
 			array[index]=image
+			label[index]=label_loaded[line]
 			index = index + 1
 	return array
 
@@ -45,14 +47,15 @@ if (result != 0):
 	print(len2)
 	# création d'une nouvelle image numpy
 	new_array = np.zeros((len2, 32,32,3)) 
-	new_array = create_array (len1,len2, new_array)
+	new_label = np.zeros((len2, 5)) 
+	new_array, new_label = create_array (len1,len2, new_array, new_label)
 
 	# on la sauve dans un fichier
 	np.save('INSA_Train/new_train_RGB.npy', new_array)
+	np.save('INSA_Train/new_train_label.npy', new_label)
 
 
 #sinon
 else :
 	print("pas d images noires dans le dataset")
-
 
