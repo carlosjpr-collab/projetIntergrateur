@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# Ce script permet d'afficher et de sauver les images en modifiant les couleurs
+# Ce script permet d'afficher les images en modifiant les couleurs
 
 
 #array_loaded = np.load ('INSA_Test/test_RGB_0_10_25.npy')
