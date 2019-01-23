@@ -1,6 +1,6 @@
 import numpy as np
 
-# Modifie la nomenclature des labels du dataset de test et train
+# Modifie la nomenclature des labels des datasets test et train
 
 label_train = np.load('INSA_Train/train_labels_0_10_25.npy')
 label_test = np.load('INSA_Test/test_labels_0_10_25.npy')
